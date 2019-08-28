@@ -9,7 +9,7 @@ fs.watchFile(buttonPressesLogFile, { interval: 100 }, update);
 
 function update(err, data) {
   exec(
-    "gcc ./src/index.c -o ./dist/.out && ./dist/.out",
+    "gcc ./src/index.c -o ./dist/.out && ./dist/.out < input.txt",
     (err, stdout, stderr) => {
       if (err || stderr) {
         createPage("<div style='color:red'>" + err + "</div>");
