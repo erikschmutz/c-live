@@ -1,15 +1,15 @@
 const fs = require("fs");
 const { exec } = require("child_process");
-const buttonPressesLogFile = "./src/index.c";
+const buttonPressesLogFile = "./src/";
 const template = require("./template.js");
 console.log(`Watching for file changes on ${buttonPressesLogFile}`);
 
 update();
-fs.watchFile(buttonPressesLogFile, { interval: 100 }, update);
+fs.watch(buttonPressesLogFile, { interval: 100 }, update);
 
 function update(err, data) {
   exec(
-    "gcc ./src/index.c -o ./dist/.out && ./dist/.out < input.txt",
+    "gcc ./src/index.c -o ./dist/.out && ./dist/.out < ./src/input.txt",
     (err, stdout, stderr) => {
       if (err || stderr) {
         createPage("<div style='color:red'>" + err + "</div>");
